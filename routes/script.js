@@ -24,6 +24,10 @@ function addMoreRow() {
 
 function calculate() {
   var table = document.getElementById("calculatorTable");
+  var currentAverageText = document.getElementById("currentAverageText");
+  var bestAverageText = document.getElementById("bestAverageText");
+  var worstAverageText = document.getElementById("worstAverageText");
+
   var totalRows = table.rows.length;
 
   var totalWeight = 0;
@@ -52,7 +56,7 @@ function calculate() {
   worstCase = totalMark;
   bestCase = totalMark + missingWeight;
 
-  console.log(worstCase);
-  console.log(bestCase);
-  console.log(currentAverage);
+  currentAverageText.innerHTML = "Current Average: " + currentAverage.toFixed(2);
+  bestAverageText.innerHTML = "Best Case Scenario Average: " + bestCase.toFixed(2);
+  worstAverageText.innerHTML = "Worst Case Scenario Average: " + worstCase.toFixed(2);
 }
