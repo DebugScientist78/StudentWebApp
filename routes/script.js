@@ -23,6 +23,10 @@ function addMoreRow() {
 }
 
 function calculate() {
+
+  var errorMessage = document.getElementById("errorMessage");
+  errorMessage.innerHTML = "";
+
   var table = document.getElementById("calculatorTable");
   var currentAverageText = document.getElementById("currentAverageText");
   var bestAverageText = document.getElementById("bestAverageText");
@@ -38,8 +42,41 @@ function calculate() {
   var currentAverage = 0;
   var multiplierFactor = 0;
 
+
+  for(var i = 1; i < totalRows-1; i++) {
+    if(table.rows[i].cells[1].firstChild.value == "") {
+      table.rows[i].cells[1].firstChild.value = 0;
+    }
+
+    if(table.rows[i].cells[0].firstChild.value == "") {
+      table.rows[i].cells[0].firstChild.value = 0;
+    }
+
+    if(!Number.isFinite(parseInt(table.rows[i].cells[1].firstChild.value))) {
+      errorMessage.innerHTML = "Error: Can't input symbols.";
+    }
+    if(!Number.isFinite(parseInt(table.rows[i].cells[0].firstChild.value))) {
+      errorMessage.innerHTML = "Error: Can't input symbols and letters.";
+    }
+  }
+
+
+
   for(var i = 1; i < totalRows-1; i++) {
     totalWeight += parseInt(table.rows[i].cells[1].firstChild.value);
+  }
+
+  try {
+    if(totalWeight > 100) {
+      throw weightError();
+    }
+  } catch(err) {
+    
+    if(err.name == "WeightError") {
+      errorMessage.innerHTML = "Error: You can't have a weight of more than 100%.";
+    }
+
+    return;
   }
 
   missingWeight = 100 - totalWeight;
@@ -59,4 +96,10 @@ function calculate() {
   currentAverageText.innerHTML = "Current Average: " + currentAverage.toFixed(2);
   bestAverageText.innerHTML = "Best Case Scenario Average: " + bestCase.toFixed(2);
   worstAverageText.innerHTML = "Worst Case Scenario Average: " + worstCase.toFixed(2);
+}
+
+function weightError() {
+  var error = new Error("Weight above 100%");
+  error.name = "WeightError";
+  return error;
 }
