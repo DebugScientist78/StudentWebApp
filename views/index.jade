@@ -1,5 +1,24 @@
 extends layout
 
 block content
-  h1= title
-  p Welcome to #{title}
+  div#title.px-4.py-5.text-center
+    h1#title.h1.display-3.font-weight-bold=title
+  div#SchedularBG.container-fluid.py-5
+    div.row
+      div.col
+        h2#SchedularText.h2.display-5.font-weight-bold.text-start.px-4 Assignment & Homework Schedular
+        p.lead.text-break.px-4 
+          | Utilize Google Calender in order to track homework and assignemnt due dates.
+          | In combination with the calender, automatic updates can be made to marks.
+      div.col.text-center.align-self-center
+        a#buttonSchedular.btn.btn-primary.px-3.py-4(href="/schedule", role='button') Open Schedular
+  div#MarkBG.container-fluid.py-5
+    div.row
+      div.col
+        h2#SchedularText.display-5.font-weight-bold.text-start.px-4 Mark Calculator
+        p.lead.text-break.px-4 
+          | Store any amount of marks with their respective weights to determine averages.
+          | Along with that, the calculator also provides predicitons of best case and worse case
+          | scenarios based on current marks given.
+      div.col.text-center.align-self-center
+        a#buttonMark.btn.btn-primary.px-3.py-4(role='button', href='/mark') Open Mark Calculator

@@ -1,0 +1,36 @@
+extends layout
+
+block content
+    nav.navbar.navbar-light(style='background-color: #{navColor};')
+        a.navbar-brand Student Web App
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target="#navbarNavAltMarkup", aria-controls="navbarNavAltMarkup", aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+        div#navbarNavAltMarkup.collapse.navbar-collapse
+            div.navbar-nav
+                a.nav-item.active.nav-link(href='/') Home
+                span.sr-only
+                a.nav-item.nav-link(href='/schedule') Schedular
+    div#ScheduleTitle.px-4.py-5.text-center
+        h1.h1.display-4.font-weight-bold=title
+    div#form.py-3
+        p.px-4 Select a day to set the due date
+    div#calendar
+    div#form.container-fluid.py-5
+        form
+            div.mb-3
+                label.form-label(for='TaskName') Name of Assignemnt/Test
+                input#TaskName.form-control(type='text')
+            div.mb-3
+                label.form-label(for='TaskType') Type of assessment
+                select#TaskType.form-select
+                    option Homework
+                    option Assignment
+                    option Test
+            fieldset
+                a#SchedularSubmit.btn.btn-primary(type='submit', role='button') Submit
+    div#list.container-fluid.py-5
+        div.card
+            div.card-body
+                h5.card-title To Do List
+                div#para
+                    p#ListText.card-text Empty eh?, try adding stuff

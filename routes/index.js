@@ -5,16 +5,16 @@ const router = express.Router();
 const app = express();
 var path = require('path');
 
-app.use(express.static('public'))
-
-app.get('/', function(req, res) {
-    console.log(path);
-    res.sendFile(path.join(__dirname + '/index.html'));
-});
-
 app.get('/calculator', function(req, res) {
     console.log(path);
     res.sendFile(path.join(__dirname + '/calculator.html'));
+});
+
+/* GET home page. */
+router.get('/', function(req, res, next) {
+  res.render('index', { 
+    title: 'Student Web App'
+  });
 });
 
 app.listen(8000);
