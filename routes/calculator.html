@@ -10,7 +10,7 @@
 <link href="style.css" rel="stylesheet">
 <script type="text/javascript" src="/calculator.js"></script>
 
-<body>
+<body onload="checkCookie()">
 
 	<!-- Navbar -->
 	<div class="w3-top">
@@ -31,10 +31,8 @@
 </div>
 
 <!-- Header -->
-<header class="w3-container w3-red w3-center" style="padding:128px 16px">
+<header class="w3-container w3-red w3-center" style="padding:64px 16px">
   <h1 class="w3-margin w3-jumbo">CALCULATOR</h1>
-  <p class="w3-xlarge">Template by w3.css</p>
-  <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Get Started</button>
 </header>
 
 <!-- First Grid -->
@@ -70,8 +68,11 @@
         <td><input type="text" id="weight" size="30"> </td>
       </tr>
       <tr>
-        <td><input type="submit" class="button" value="Add another line" onclick="addMoreRow()" /></td>          
-    </tr>
+        <td><input type="submit" class="button" value="Add another line" onclick="addMoreRow()"/></td>          
+      </tr> 
+      <tr>
+        <td><input type="submit" class="button" value="Remove a line" onclick="removeRow()"/></td>          
+      </tr>
     </table> 
     <p id="errorMessage"></p><br>
     <input type="submit" class="button" value="Calculate Average" onclick="calculate()"/>
@@ -88,7 +89,7 @@
 </div>
 
 <!-- Footer -->
-<footer class="w3-container w3-black w3-center w3-opacity w3-padding-64">  
+<footer class="w3-container w3-black w3-center w3-opacity" style="padding:10px 16px">  
  <p>Powered by <a href="https://www.w3schools.com/w3css/default.asp" target="_blank">w3.css</a></p>
 </footer>
 </body>
