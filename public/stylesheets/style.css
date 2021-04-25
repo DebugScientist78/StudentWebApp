@@ -43,6 +43,14 @@ body {
   background-color: #b3ffec;
 }
 
+#form {
+  background-color: #66ffd9;
+}
+
+#list {
+  background-color:  #4dffd2;
+}
+
 a {
   color: #00B7FF;
 }
