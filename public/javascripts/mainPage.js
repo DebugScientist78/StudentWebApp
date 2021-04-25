@@ -4,6 +4,28 @@ var currentTaskNum = 0;
 var rawTxt = '';
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
 
+function setCookie(cname, cvalue, exdays) {
+    var d = new Date();
+    d.setTime(d.getTime() + (exdays*24*60*60*1000));
+    var expires = "expires="+ d.toUTCString();
+    document.cookie = cname + "=" + cvalue + ";" + expires + ";path=/";
+}
+  
+function getCookie(cname) {
+var name = cname + "=";
+var decodedCookie = decodeURIComponent(document.cookie);
+var ca = decodedCookie.split(';');
+    for(var i = 0; i <ca.length; i++) {
+        var c = ca[i];
+        while (c.charAt(0) == ' ') {
+        c = c.substring(1);
+        }
+        if (c.indexOf(name) == 0) {
+        return c.substring(name.length, c.length);
+        }
+    }
+    return "";
+}
 
 jQuery(function() {
     $("#buttonSchedular").on("click", function() {
@@ -26,6 +48,21 @@ jQuery(function() {
             selectable: true
         });
         calendar.render();
+
+        //Update
+        let taskCookie = getCookie("TaskList");
+        if (taskCookie != null) {
+            console.log("loaded cookies");
+            let loadedTasks = taskCookie.split('/');
+            currentTaskNum += 1;
+            $("#ListText").text(loadedTasks[0]);
+            if (loadedTasks.length > 1) {
+                for (let i = 1; i < loadedTasks.length; i++) { 
+                    $("#para").append("<p class='card-text'>" + loadedTasks[i] +"</p>");
+                }
+            }
+            Task = loadedTasks;   
+        }
     }
 
     $("#SchedularSubmit").on("click", function() {
@@ -46,13 +83,18 @@ jQuery(function() {
             } else {
                 taskObj = currentTaskNum + ". Your " + $("#TaskName").val() + " assignemnt is due: " + tempStr;
             }
-                if (currentTaskNum == 1) $("#ListText").text(taskObj);
+            Task.push(taskObj);
+            if (currentTaskNum == 1) $("#ListText").text(taskObj);
             else {
                 $("#para").append(
                     "<p class='card-text'>" + taskObj +"</p>"
                     );
             }
+
+            setCookie("TaskList", Task.join('/'), 365);
+            console.log(Task.join('/'));
         }
         
+
     });
 });
