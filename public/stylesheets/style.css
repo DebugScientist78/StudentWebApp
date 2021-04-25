@@ -7,7 +7,7 @@ body {
 #title {
   font-family: 'Ubuntu', sans-serif;
   background-color: rgb(173, 216, 230);
-  padding: 45px;
+  height: 30vh;
 }
 
 #SchedularBG {
@@ -53,4 +53,8 @@ body {
 
 a {
   color: #00B7FF;
+}
+
+.container-fluid {
+  height: 35vh;
 }
