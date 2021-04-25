@@ -3,6 +3,8 @@ var Task = [];
 var currentTaskNum = 0;
 var rawTxt = '';
 var months = ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'];
+var monthsReverse={'January' : 1, 'February' : 2, 'March' : 3, 'April' : 4, 'May' : 5, 'June' : 6, 'July' : 7, 'August' : 8, 'September' : 9, 'October' : 10, 'November' : 11, 'December': 12};
+var notifited = true;
 
 function setCookie(cname, cvalue, exdays) {
     var d = new Date();
@@ -24,7 +26,13 @@ var ca = decodedCookie.split(';');
         return c.substring(name.length, c.length);
         }
     }
-    return "";
+    return null;
+}
+
+function getDayDiff(date1, date2) {
+    var timeDiff = Math.abs(date2.getTime() - date1.getTime());
+    var diffDays = Math.ceil(timeDiff / (1000 * 3600 * 24)); 
+    return diffDays;
 }
 
 jQuery(function() {
@@ -58,10 +66,42 @@ jQuery(function() {
             $("#ListText").text(loadedTasks[0]);
             if (loadedTasks.length > 1) {
                 for (let i = 1; i < loadedTasks.length; i++) { 
+                    currentTaskNum += 1;
                     $("#para").append("<p class='card-text'>" + loadedTasks[i] +"</p>");
                 }
             }
             Task = loadedTasks;   
+        }
+
+        //check if any task dates are the same as today, or the day before to notify the user
+        //use alerts
+        
+        if (taskCookie != null) {
+            let today = new Date();
+            for (let i = 0; i < Task.length; i++) {
+                end = Task[i].length - 6;
+                begin = 0;
+                for (let j = end; Task[i].charAt(j) != ' '; j--) {
+                    begin  = j;
+                }
+                let taskDay = parseInt(Task[i].substring(begin,end));
+                end = begin-2;
+                for (let j = end; Task[i].charAt(j) != ' '; j--) {
+                    begin  = j;
+                }
+                let taskMonth = Task[i].substring(begin,end+1);
+                end = Task[i].length;
+                begin = end - 4;
+                let taskYear = Task[i].substring(begin,end);
+                let taskDate = new Date(monthsReverse[taskMonth]+'/'+taskDay+'/'+taskYear);
+                let dayDiff  = getDayDiff(today, taskDate);
+
+                let taskNum = Task[i][0];
+                console.log(taskNum + " " + dayDiff);
+                let pos = today - taskDate;
+                if (dayDiff == 1 && today.getDate() == taskDate.getDate()) alert("Task #"+taskNum+" is due today, make sure to get it done today!");
+                else if (dayDiff == 1 && pos < 0) alert("Task #"+taskNum+" is due tomorrow, remember to finish it soon :)");
+            }
         }
     }
 
@@ -91,7 +131,8 @@ jQuery(function() {
                     );
             }
 
-            setCookie("TaskList", Task.join('/'), 365);
+            if (currentTaskNum != 1) setCookie("TaskList", Task.join('/'), 365);
+            else setCookie("TaskList", taskObj, 365);
             console.log(Task.join('/'));
         }
         
