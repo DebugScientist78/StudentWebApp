@@ -8,7 +8,7 @@
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat">
 <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
 <link href="style.css" rel="stylesheet">
-<script type="text/javascript" src="/calculator.js"></script>
+<script type="text/javascript" src="/script.js"></script>
 
 <body>
 
@@ -17,8 +17,7 @@
 		<div class="w3-bar w3-red w3-card w3-left-align w3-large">
 			<a class="w3-bar-item w3-button w3-hide-medium w3-hide-large w3-right w3-padding-large w3-hover-white w3-large w3-red" href="javascript:void(0);"
 			 onclick="myFunction()" title="Toggle Navigation Menu"><i class="fa fa-bars"></i></a>
-    <a href="#" class="w3-bar-item w3-button w3-padding-large w3-white">Home</a>
-    <a href="/calculator.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Calculator</a>
+    <a href="/index.html" class="w3-bar-item w3-button w3-hide-small w3-padding-large w3-hover-white">Home</a>
   </div>
 
   <!-- Navbar on small screens -->
@@ -31,14 +30,14 @@
 </div>
 
 <!-- Header -->
-<header class="w3-container w3-red w3-center" style="padding:267px 16px">
-  <h1 class="w3-margin w3-jumbo">WELCOME</h1>
-  <p class="w3-xlarge">All the necessary tools students need packed into one!</p>
-  <form style="margin: 0; padding: 0" action="/register.html">
+<header class="w3-container w3-red w3-center" style="padding:301px 16px">
+  <h1 class="w3-margin w3-jumbo">REGISTER</h1>
+  <form>
+    <td><input type="text" id="username" size="30" placeholder="Username" required></td>
+    <br><br>
+    <td><input type="password" id="password" size="30" placeholder="Password" required> </td>
+    <br>
     <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Register</button>
-  </form>
-  <form style="margin: 0; padding: 0" action="/login.html">
-    <button class="w3-button w3-black w3-padding-large w3-large w3-margin-top">Login</button>
   </form>
 </header>
 

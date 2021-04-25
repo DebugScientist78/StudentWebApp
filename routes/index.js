@@ -33,7 +33,7 @@ router.get('/createdb', (req, res) => {
 
 //Creates account table
 router.get('/createaccountstable', (req, res) => {
-    let sql = 'CREATE TABLE accounts(id int AUTO_INCREMENT, title VARCHAR(255), body VARCHAR(255), PRIMARY KEY (id))';
+    let sql = 'CREATE TABLE accounts(username VARCHAR(255), password VARCHAR(255)';
     db.query(sql, (err, result) =>{
         if(err) throw err;
         console.log(result);
@@ -93,10 +93,28 @@ router.get('/deleteaccount/:id', (req, res) => {
     });
 })
 
-//Sends html file to user
+//Sends index html file to user
 router.get('/', function(req, res) {
     console.log(path);
     res.sendFile(__dirname + '/index.html'); 
+});
+
+//Sends register html file to user
+router.get('/register.html', function(req, res) {
+    console.log(path);
+    res.sendFile(__dirname + '/register.html'); 
+});
+
+//Sends login html file to user
+router.get('/login.html', function(req, res) {
+    console.log(path);
+    res.sendFile(__dirname + '/login.html'); 
+});
+
+//Sends login html file to user
+router.get('/calculator.html', function(req, res) {
+    console.log(path);
+    res.sendFile(__dirname + '/calculator.html'); 
 });
 
 module.exports = router;
