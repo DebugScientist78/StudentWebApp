@@ -35,7 +35,7 @@ router.get('/createdb', (req, res) => {
 
 //Creates account table
 router.get('/createaccountstable', (req, res) => {
-    let sql = 'CREATE TABLE accounts(userID int PRIMARY KEY, user VARCHAR(255), pass VARCHAR(255))';
+    let sql = 'CREATE TABLE accounts(userID int PRIMARY KEY AUTO_INCREMENT, user VARCHAR(255), pass VARCHAR(255))';
     db.query(sql, (err, result) =>{
         if(err) throw err;
         console.log(result);
@@ -125,15 +125,24 @@ app.get('/login', function(req, res) {
     res.sendFile(path.join(__dirname + '/login.html'));
 });
 
-app.get('/creatingAccount/:id2/:user2/:pass2', function(req, res) {
+app.get('/creatingAccount/:user2/:pass2', function(req, res) {
     console.log(path);
 
-    var id = parseInt(req.params.id2);
-    console.log(id);
-
-    let account = {userID: id, user: req.params.user2, pass: req.params.pass2};
+    let account = {user: req.params.user2, pass: req.params.pass2};
     let sql = `INSERT INTO accounts SET ?`;
     let query = db.query(sql, account, (err, result) => {
+        if(err) throw err;
+        console.log(result);
+    });
+
+    res.redirect('/');
+});
+
+app.get('/login/:user2/:pass2', function(req, res) {
+    console.log(path);
+
+    let sql = `SELECT * FROM accounts WHERE user = ${req.params.user}`;
+    let query = db.query(sql, (err, result) => {
         if(err) throw err;
         console.log(result);
     });

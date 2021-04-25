@@ -1,6 +1,6 @@
-function createAccount() {
+function login() {
     var user = document.getElementById('username').value;
     var pass = document.getElementById('password').value;
 
-    window.location = "creatingAccount/" + user + "/" + pass;
+    window.location = "login/" + user + "/" + pass;
 }
