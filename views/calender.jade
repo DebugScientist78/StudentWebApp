@@ -1,0 +1,15 @@
+extends layout
+
+block content
+    nav.navbar.navbar-light(style='background-color: #{navColor};')
+        a.navbar-brand Student Web App
+        button.navbar-toggler(type='button', data-toggle='collapse', data-target="#navbarNavAltMarkup", aria-controls="navbarNavAltMarkup", aria-expanded="false", aria-label="Toggle navigation")
+            span.navbar-toggler-icon
+        div#navbarNavAltMarkup.collapse.navbar-collapse
+            div.navbar-nav
+                a.nav-item.active.nav-link(href='/') Home
+                span.sr-only
+                a.nav-item.nav-link(href='/schedule') Schedular
+    div#ScheduleTitle.px-4.py-5.text-center
+        h1.h1.display-4.font-weight-bold=title
+    div#calendar
